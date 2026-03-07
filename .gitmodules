@@ -1,0 +1,3 @@
+[submodule "infraVerilogSetup"]
+	path = infraVerilogSetup
+	url = https://github.com/anconet/infraVerilogSetup.git
