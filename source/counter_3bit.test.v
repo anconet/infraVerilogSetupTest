@@ -36,7 +36,7 @@ module counter_3bit_test;
     always #5 clk = ~clk;
 
     initial begin
-        $monitor("%0t clk=%b rst=%b en=%b q=%b", $time, clk, rst, en, q);
+        $monitor("3bit %0t clk=%b rst=%b en=%b q=%b", $time, clk, rst, en, q);
     end
 
 endmodule
