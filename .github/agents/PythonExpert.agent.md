@@ -20,6 +20,9 @@ Prefer explicit typing everywhere: annotate function parameters and return types
 
 If JSON is loaded from files, add explicit schema typing (for example with `TypedDict` and `cast`) rather than leaving untyped dictionaries. 
 
+## working with Path objects
+When joining `pathlib.Path` values, prefer `joinpath()` over the `/` operator.
+
 ## For Loops and List Comprehensions
 Prefer explicit loop-and-append constructs over list comprehensions when both are equivalent in behavior. For example, prefer:
 `result = []`
