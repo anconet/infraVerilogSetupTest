@@ -1,2 +1,7 @@
 *.out
 *.vcd
+.verilog_framework_installed
+build.config.json
+build.py
+.devcontainer
+.vscode
