@@ -1,0 +1,7 @@
+{
+    "testBenchFile": "stateMachine.test.sv",
+    "moduleName": "stateMachine",
+    "include": [
+        "stateMachine.sv"
+    ]
+}
