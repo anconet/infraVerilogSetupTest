@@ -1,32 +1,42 @@
 ---
 agent: ask
-description: "Create a Verilog include manifest (<moduleName>.include.json) for a testbench with required source dependencies."
-argument-hint: "Module name, testbench file name, and files required for compilation."
+description: "Create a general Verilog/SystemVerilog include manifest JSON file used by build.py workflows."
+argument-hint: "Include manifest filename and ordered list of required source files; optional additional metadata keys."
 ---
 
 # Verilog Include Manifest Creation
 
-Create a JSON include manifest for a Verilog/SystemVerilog testbench used by `build.py` from `infraVerilogSetup`.
+Create a general JSON include manifest for Verilog/SystemVerilog build workflows.
 
 ## Rules
 
-1. Name the manifest file `<moduleName>.include.json`.
-2. Set `testBenchFile` to the testbench filename, typically `<moduleName>.test.sv`.
-3. Set `moduleName` to the module under test.
-4. Set `include` to an ordered array of all source files required to compile and run the testbench successfully.
-5. Include all required dependencies to avoid compilation failures.
+1. Output valid JSON only.
+2. Always include an `include` key whose value is an ordered array of required source files.
+3. Keep the `include` array empty (`[]`) if no source files are provided yet.
+4. Add other top-level keys only when the user explicitly asks for them.
+5. Preserve the user-provided key names exactly.
 
 ## Output Schema
 
 ```json
 {
-  "testBenchFile": "adder.test.sv",
-  "moduleName": "adder",
-  "include": [
-    "adder.sv",
-    "utils.sv"
-  ]
+  "include": []
 }
 ```
 
-Return the manifest as valid JSON only.
+If optional metadata is requested, include it alongside `include`.
+
+## Note to users
+
+Different workflows in this repository use different optional top-level keys in addition to `include`.
+
+- RTL include style from `VerilogRTLIncludeFileCreation.prompt.md`:
+  - `moduleFile`: The RTL source filename, for example `<moduleName>.sv`.
+  - `moduleName`: The DUT module name.
+  - `include`: Usually `[]` unless extra dependency files are required.
+- Test include style from `VerilogTestIncludeManifestCreation.prompt.md`:
+  - `testBenchFile`: The testbench filename, for example `<moduleName>.test.sv`.
+  - `DUT`: The DUT module name.
+  - `include`: Ordered dependency list, often starting with `<moduleName>.sv`.
+
+Use the key set that matches the consuming tool or workflow, and keep `include` present in all cases.
