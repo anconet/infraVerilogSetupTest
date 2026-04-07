@@ -1,0 +1,7 @@
+{
+  "testBenchFile": "mux.test.sv",
+  "DUT": "mux",
+  "include": [
+    "mux.sv"
+  ]
+}
